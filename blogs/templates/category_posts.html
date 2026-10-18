@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block main_content %}
+<main class="mt-4">
+  <h1>{{ category.category_name }}</h1>
+  <br>
+  {% for post in category_posts %}
+  <article class="blog-post">
+    <h2 class="blog-post-title">{{ post.title }}</h2>
+    <p class="blog-post-meta">{{ post.created_at|date:"M d, Y" }} | <a href="#">{{post.author}}</a></p>
+    <p>{{ post.short_description }}</p>
+    <strong><a href="#" class="text-warning">Continue reading</a></strong>
+  </article>
+  {% empty %}
+  <p>No published posts in this category yet.</p>
+  {% endfor %}
+</main>
+{% endblock main_content %}
