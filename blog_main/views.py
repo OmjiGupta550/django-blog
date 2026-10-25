@@ -10,5 +10,5 @@ def home(request):
         "featured_posts" : featured_posts ,
         "normal_posts" : normal_posts,
     }
-    print(featured_posts)
     return render(request , "home.html" , context)
+

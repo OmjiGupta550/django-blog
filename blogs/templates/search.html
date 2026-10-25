@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<main class="mt-4">
+  <h1>Search results</h1>
+  {% if keywords %}
+    <p>Results for "{{ keywords }}"</p>
+    {% for post in blog %}
+      <article class="blog-post">
+        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <p class="blog-post-meta">{{ post.created_at|date:"M d, Y" }} | {{ post.author }}</p>
+        <p>{{ post.short_description }}</p>
+        <a href="{% url 'singleblog' post.slug %}" class="text-warning">Continue reading</a>
+      </article>
+    {% empty %}
+      <p>No published posts matched your search.</p>
+    {% endfor %}
+  {% else %}
+    <p>Enter a search term to find published posts.</p>
+  {% endif %}
+</main>
+{% endblock main_content %}

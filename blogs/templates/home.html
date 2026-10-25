@@ -7,7 +7,7 @@
         <div class="col-md-8 px-0">
           <h1 class="display-4 font-italic">{{posts.title}}</h1>
           <p class="lead my-3">{{posts.short_description}}</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+          <p class="lead mb-0"><a href="{% url 'singleblog' posts.slug %}" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
       </div>
   {% endif %}
@@ -38,7 +38,7 @@
             <h3 class="mb-2">
               {{ posts.title|truncatewords:10}}
             </h3>
-            <a href="#"
+            <a href="{% url 'singleblog' posts.slug %}"
                class="font-weight-bold stretched-link mt-2 text-warning">
               Continue reading
             </a>
@@ -73,7 +73,10 @@
           <p>{{normal_post.blog_body|truncatechars:500}} </p>
          
           <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p> 
-          
+          <a href="{% url 'singleblog' normal_post.slug %}"
+               class="font-weight-bold stretched-link mt-2 text-warning">
+              Continue reading
+            </a>
         </div>
         {% endfor %}
 

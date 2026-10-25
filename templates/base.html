@@ -15,13 +15,35 @@
 <body>
     <div class="container">
       <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-8 pt-1">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4 pt-1 text-center text-md-left">
             <a class="blog-header-logo text-warning" href="/">Django Blog</a>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
-            <a class="btn btn-sm btn-warning" href="#">Login</a> &nbsp;
-            <a class="btn btn-sm btn-outline-secondary" href="#">Register</a>
+
+          <div class="col-md-4 header-search">
+            <form action="{% url 'search' %}" method="get" class="search-form">
+                <input
+                    type="search"
+                    name="keywords"
+                    value="{{ keywords|default:'' }}"
+                    placeholder="Search articles..."
+                    aria-label="Search blog posts"
+                >
+                <button type="submit class="btn btn-warning">Search</button>
+            </form>
+          </div>
+
+          <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center">
+            {% if user.is_authenticated %}
+              <span class="mr-2">{{ user.get_username }}</span>
+              <form action="{% url 'logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-warning">Log out</button>
+              </form>
+            {% else %}
+              <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Log in</a> &nbsp;
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'signup' %}">Sign up</a>
+            {% endif %}
           </div>
         </div>
       </header>
